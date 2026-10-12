@@ -80,15 +80,20 @@ Ask only for what's missing and can't be looked up:
 
 ## Output format
 
-Write the analysis as a Markdown file in the `Competitive Strategy` folder at the project
-root (create the folder if it doesn't exist):
-`Competitive Strategy/<company>-five-forces.md`
+Every analysis is delivered as a PDF, saved in the `Competitive Strategy` folder at the project
+root (create the folder if it doesn't exist). Write the Markdown first, then convert it. Keep both
+files: the Markdown is the editable source, and the PDF is the deliverable.
+
+1. Write `Competitive Strategy/<name>.md` using the template below.
+2. Convert it: `python3 -I scripts/md_to_pdf.py "Competitive Strategy/<name>.md"`. This writes
+   `Competitive Strategy/<name>.pdf` next to the Markdown. The script needs the `markdown` Python package
+   and Google Chrome; if the conversion fails, say so and give the Markdown path rather than skipping the PDF.
 
 Filename: lowercase the company name, replace spaces with hyphens, and drop punctuation
 (`AT&T` → `att`, `L'Oréal` → `loreal`). For a segment-specific analysis, append the segment
-(`amazon-aws-five-forces.md`); for a peer comparison, use the focal company's name. If the
-file already exists, don't overwrite it — append the date (`<company>-five-forces-YYYY-MM-DD.md`)
-unless the user asked to update the existing analysis.
+(`amazon-aws-five-forces`); for a peer comparison, use the focal company's name. If the
+file already exists, don't overwrite it — append the date (`<company>-five-forces-YYYY-MM-DD`)
+unless the user asked to update the existing analysis. The `.md` and `.pdf` names always match.
 
 Use this structure:
 
@@ -160,18 +165,8 @@ strongest execution.>
 - **Keep it to one focal company per file.** Peers appear only in the Peer comparison
   section; omit that section unless the user named peers or asked for a comparison.
 
-## Quality check
-
-`scripts/check_output.py` tests the file against this contract: sections and order, the ratings
-table, rating lines matching the table, dated citations in Evidence, the attractiveness label
-matching the ratings, dated Sources, stale sources flagged, Gaps, and leftover placeholders.
-If the optional PostToolUse hook is installed (see the README), it runs the checker after every write
-or edit of a five-forces file, and any FAIL comes back to you. Fix each one in the file before replying. The check passing means the write-up is
-well-formed; it does not mean the judgments are right, so still review the reasoning yourself.
-Without the hook, run `python3 scripts/check_output.py "<output file>"` yourself after writing.
-
 ## Final message
 
-After writing the file and passing the quality check, reply with: the file path, the summary
-block (the three lines under "Summary"), the one or two gaps that most limit confidence, and the
-check result (e.g. "14/14 checks passed"). Keep the chat reply short; the detail lives in the file.
+After writing and converting the file, reply with: the PDF path (and the Markdown path), the summary
+block (the three lines under "Summary"), and the one or two gaps that most limit confidence. Keep the
+chat reply short; the detail lives in the file.
