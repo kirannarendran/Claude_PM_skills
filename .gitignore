@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 .DS_Store
 Competitive Strategy/
+.claude/settings.local.json
