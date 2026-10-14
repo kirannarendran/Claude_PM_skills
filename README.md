@@ -8,9 +8,9 @@ category folders under `skills/`.
 | Category | Skill | What it does |
 |---|---|---|
 | [strategy-and-market](skills/strategy-and-market/) | [porters-five-forces](skills/strategy-and-market/porters-five-forces/) | Porter's Five Forces analysis of a company, saved as a PDF with a Markdown source |
+| [metrics-and-experiments](skills/metrics-and-experiments/) | [pm-data-analysis](skills/metrics-and-experiments/pm-data-analysis/) | Turns a business dataset into checked findings, tested hypotheses and ranked recommendations, saved as a PDF report; optional slide deck |
 
-Planned categories: discovery and research, prioritization and planning, specs and communication, and metrics
-and experiments.
+Planned categories: discovery and research, prioritization and planning, and specs and communication.
 
 ## Install a skill
 
@@ -32,8 +32,9 @@ Swiggy" loads the Five Forces skill.
 
 ## PDF output
 
-Each skill that produces a write-up saves it as a PDF, next to a Markdown copy. The Five Forces skill writes to
-`Competitive Strategy/` in the folder where Claude Code is running:
+Each skill that produces a write-up saves it as a PDF, next to a Markdown copy, in the folder where Claude Code
+is running. The data analysis skill writes to `Data Analysis/<dataset>-analysis.md` and `.pdf`. The Five Forces
+skill writes to `Competitive Strategy/`:
 
 - `Competitive Strategy/<company>-five-forces.md`: editable source
 - `Competitive Strategy/<company>-five-forces.pdf`: the deliverable
@@ -51,6 +52,15 @@ to use another Chromium-based browser.
 
 Each skill lives in `skills/<category>/<skill-name>/` with a `SKILL.md` at its root. Put it in an existing
 category folder when one fits, or create a new one. Include `scripts/` when the skill has them.
+
+## Data analysis helper scripts
+
+The data analysis skill runs two scripts, which need `pandas`:
+
+- `scripts/profile_data.py <file-or-folder>`: rows, keys, blanks, date ranges, category values and likely joins
+  for every CSV, TSV or Excel file.
+- `scripts/segment_scan.py <csv> --value <column> --flag <column>=<value>`: compares groups within each column and
+  marks the columns where groups don't really differ as FLAT.
 
 ## Limits
 
